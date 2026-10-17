@@ -24,6 +24,7 @@ function DrawCars() {
     sheet.getRange("A8").setValue(2);
     sheet.getRange("A9:A12").setValue(2);
     sheet.getRange("A13").setValue("");
+    sheet.getRange("B1").setvalue("");
 }
 function MovePlayer() {
     const lock = LockService.getScriptLock();
@@ -41,6 +42,10 @@ function MovePlayer() {
   sheet.getRange("A8").setValue(col)
     if (col >= 26) {
         sheet.getRange("A13").setValue("over")
+       sheet.getRange("B1").setValue("YOU WIN");
+       sheet.getRange("B1").setFontSize(18); 
+       sheet.getRange("B1").setFontWeight("bold");
+       sheet.getRange("B1").setFontColor("blue");
         SpreadsheetApp.getUi().alert("You win!");
         lock.releaseLock();
         return;
@@ -62,6 +67,10 @@ for (let row = 3; row <= 6; row++) {
     sheet.getRange(row + 6, 1).setValue(col);
     if (col >=26) {
         sheet.getRange("A13").setValue("over");
+        sheet.getRange("B1").setValue(color.toUpperCase() + "Wins!");
+        sheet.getRange("B1").setFontSize(18);
+        sheet.getRange("B1").setFontWeight("bold");
+        sheet.getRange("B1").setFontColor(color);
         SpreadsheetApp.getUi().alert("You lose");
         return;
     }
@@ -73,4 +82,4 @@ function drawtrack() {
     FinishLine();
     ClearPastFinish();
     DrawCars();
-}
+} 
