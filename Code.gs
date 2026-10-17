@@ -23,20 +23,27 @@ function DrawCars() {
     sheet.getRange ("B6").setBackground ("orange")
     sheet.getRange("A8").setValue(2);
     sheet.getRange("A9:A12").setValue(2);
+    sheet.getRange("A13").setValue("");
 }
 function MovePlayer() {
     const lock = LockService.getScriptLock();
     lock.waitLock(10000);
     
     const sheet = SpreadsheetApp.getActiveSheet();
+    if (sheet.getRange("A13").getValue() === "over") {
+    lock.releaseLock();
+    return;
+    }
   let col = sheet.getRange ("A8").getValue()
   sheet.getRange (2, col).setBackground("Grey")
   col= col + 1
   sheet.getRange (2, col).setBackground("Blue")
   sheet.getRange("A8").setValue(col)
     if (col >= 26) {
+        sheet.getRange("A13").setValue("over")
         SpreadsheetApp.getUi().alert("You win!");
         lock.releaseLock();
+        return;
     }
   MoveOpponents();
   lock.releaseLock();
@@ -54,6 +61,7 @@ for (let row = 3; row <= 6; row++) {
     sheet.getRange(row, col).setBackground(color)
     sheet.getRange(row + 6, 1).setValue(col);
     if (col >=26) {
+        sheet.getRange("A13").setValue("over");
         SpreadsheetApp.getUi().alert("You lose");
         return;
     }
