@@ -27,6 +27,7 @@ function MovePlayer() {
   col= col + 1
   sheet.getRange (2, col).setBackground("Blue")
   sheet.getRange("A8").setValue(col)
+  sheet.getRange("A9:A12").setValue(2);
 }
 function drawtrack() {
     test();
