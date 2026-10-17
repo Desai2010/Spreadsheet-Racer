@@ -17,6 +17,7 @@ function DrawCars() {
     sheet.getRange ("B4").setBackground ("yellow")
     sheet.getRange ("B5").setBackground ("purple")
     sheet.getRange ("B6").setBackground ("orange")
+    sheet.getRange("A8").setValue(2);
 
 }
 function drawtrack() {
