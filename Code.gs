@@ -10,6 +10,10 @@ function FinishLine() {
     const sheet = SpreadsheetApp.getActiveSheet();
     sheet.getRange("Z2:Z6").setBackground("Red")
 }
+function ClearPastFinish() {
+    const sheet  = SpreadsheetApp.getActiveSheet();
+    sheet.getRange("AA2:AB6").setBackground(null)
+}
 function DrawCars() {
     const sheet = SpreadsheetApp.getActiveSheet();
     sheet.getRange ("B2").setBackground("Blue")
@@ -30,6 +34,10 @@ function MovePlayer() {
   col= col + 1
   sheet.getRange (2, col).setBackground("Blue")
   sheet.getRange("A8").setValue(col)
+    if (col >= 26) {
+        SpreadsheetApp.getUi().alert("You win!");
+        lock.releaseLock();
+    }
   MoveOpponents();
   lock.releaseLock();
 }
@@ -45,11 +53,16 @@ for (let row = 3; row <= 6; row++) {
     col = col +steps;
     sheet.getRange(row, col).setBackground(color)
     sheet.getRange(row + 6, 1).setValue(col);
+    if (col >=26) {
+        SpreadsheetApp.getUi().alert("You lose");
+        return;
     }
+}
 }
 function drawtrack() {
     test();
     StartingLine();
     FinishLine();
+    ClearPastFinish();
     DrawCars();
 }
