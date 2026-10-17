@@ -20,6 +20,14 @@ function DrawCars() {
     sheet.getRange("A8").setValue(2);
 
 }
+function MovePlayer() {
+    const sheet = SpreadsheetApp.getActiveSheet();
+  let col = sheet.getRange ("A8").getValue()
+  sheet.getRange (2, col).setBackground("Grey")
+  col= col + 1
+  sheet.getRange (2, col).setBackground("Blue")
+  sheet.getRange("A8").setValue(col)
+}
 function drawtrack() {
     test();
     StartingLine();
