@@ -24,7 +24,7 @@ function DrawCars() {
     sheet.getRange("A8").setValue(2);
     sheet.getRange("A9:A12").setValue(2);
     sheet.getRange("A13").setValue("");
-    sheet.getRange("B1").setvalue("");
+    sheet.getRange("B1").setValue("");
 }
 function MovePlayer() {
     const lock = LockService.getScriptLock();
@@ -76,10 +76,25 @@ for (let row = 3; row <= 6; row++) {
     }
 }
 }
+function countdown(){
+    const sheet = SpreadsheetApp.getActiveSheet();
+    sheet.getRange("B1").setValue("3");
+    SpreadsheetApp.flush();
+    Utilities.sleep(1000);
+    sheet.getRange("B1").setValue("2");
+    SpreadsheetApp.flush();
+    Utilities.sleep(1000)
+    sheet.getRange("B1").setValue("1");
+    SpreadsheetApp.flush();
+    Utilities.sleep(1000)
+    sheet.getRange("B1").setValue("Go!");
+    SpreadsheetApp.flush();
+}
 function drawtrack() {
     test();
     StartingLine();
     FinishLine();
     ClearPastFinish();
     DrawCars();
+    countdown();
 } 
