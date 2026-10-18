@@ -78,6 +78,7 @@ for (let row = 3; row <= 6; row++) {
 }
 function countdown(){
     const sheet = SpreadsheetApp.getActiveSheet();
+    sheet.getRange("A13").setValue("over");
     sheet.getRange("B1").setValue("3");
     SpreadsheetApp.flush();
     Utilities.sleep(1000);
@@ -89,6 +90,7 @@ function countdown(){
     Utilities.sleep(1000)
     sheet.getRange("B1").setValue("Go!");
     SpreadsheetApp.flush();
+    sheet.getRange("A13").setValue("");
 }
 function drawtrack() {
     test();
