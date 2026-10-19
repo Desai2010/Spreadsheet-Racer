@@ -93,8 +93,14 @@ function countdown(){
     sheet.getRange("A13").setValue("");
 }
 function ShowSidebar(){
-    const html = HtmlServace.createHtmlOutputFromFile("Sidebar");
+    const html = HtmlService.createHtmlOutputFromFile("Sidebar");
     SpreadsheetApp.getUi().showSidebar(html);
+}
+function onOpen(){
+    SpreadsheetApp.getUi()
+    .createMenu("Racer")
+    .addItem("Open controls", "ShowSidebar")
+    .addToUi();
 }
 function drawtrack() {
     test();
