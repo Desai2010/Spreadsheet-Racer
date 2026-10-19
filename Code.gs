@@ -42,6 +42,15 @@ function MovePlayer() {
   let col = sheet.getRange ("A8").getValue()
   sheet.getRange (2, col).setBackground("Grey")
   col= col + 1
+
+let tile = sheet.getRange(2, col).getBackground();
+if (tile === "#00ffff") {
+    col = col + 2;
+}
+if (tile === "#000000") {
+    sheet.getRange(2, col).setBackground("Grey");
+    col = col - 1;
+}
   sheet.getRange (2, col).setBackground("Blue")
   sheet.getRange("A8").setValue(col)
     if (col >= 26) {
@@ -66,14 +75,14 @@ for (let row = 3; row <= 6; row++) {
     let col = sheet.getRange(row + 6, 1).getValue();
     let color = colors[row - 3];
     sheet.getRange (row, col).setBackground("Grey")
-    let steps = Math.floor(Math.random() * 3);
+    let steps = Math.floor(Math.random() * speed);
     col = col +steps;
     sheet.getRange(row, col).setBackground(color)
     sheet.getRange(row + 6, 1).setValue(col);
     
     if (col >=26) {
         sheet.getRange("A13").setValue("over");
-        sheet.getRange("B1").setValue(color.toUpperCase() + "Wins!");
+        sheet.getRange("B1").setValue(color.toUpperCase() + " Wins!");
         sheet.getRange("B1").setFontSize(18);
         sheet.getRange("B1").setFontWeight("bold");
         sheet.getRange("B1").setFontColor(color);
@@ -85,6 +94,7 @@ for (let row = 3; row <= 6; row++) {
 function countdown(){
     const sheet = SpreadsheetApp.getActiveSheet();
     sheet.getRange("A13").setValue("over");
+    sheet.getRange("B1").setFontColor("black");
     sheet.getRange("B1").setValue("3");
     SpreadsheetApp.flush();
     Utilities.sleep(1000);
@@ -112,8 +122,20 @@ function setDifficulty(level) {
     const sheet = SpreadsheetApp.getActiveSheet();
     sheet.getRange("A14").setValue(level);
 }
+function placeTiles() {
+    const sheet = SpreadsheetApp.getActiveSheet();
+
+    for (let i = 0; i < 2; i++) {
+        let boostCol = Math.floor(Math.random() * 20) + 5;
+        sheet.getRange(2, boostCol).setBackground("#00ffff");
+    let oilCol = Math.floor(Math.random() * 20) + 5;
+    sheet.getRange(2, oilCol).setBackground("#000000");
+
+    }
+}
 function drawtrack() {
     test();
+    placeTiles();
     StartingLine();
     FinishLine();
     ClearPastFinish();
