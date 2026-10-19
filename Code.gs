@@ -92,6 +92,10 @@ function countdown(){
     SpreadsheetApp.flush();
     sheet.getRange("A13").setValue("");
 }
+function ShowSidebar(){
+    const html = HtmlServace.createHtmlOutputFromFile("Sidebar");
+    SpreadsheetApp.getUi().showSidebar(html);
+}
 function drawtrack() {
     test();
     StartingLine();
