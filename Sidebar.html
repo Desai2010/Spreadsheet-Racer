@@ -1,8 +1,37 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <style>
+            body {
+                font-family: Arial;
+                background-color: #222;
+                color: white;
+            }
+            button {
+                font-size: 20px;
+                padding: 10px 20px;
+                border-radius: 8px;
+                margin: 5px;
+            }
+            #go {
+                background-color: orange;
+                color: white;
+            }
+        </style>
+        </head>
     <body>
         <h2>Spreadsheet Racer</h2>
-        <button onclick="google.script.run.MovePlayer()">Go</button>
-        <button onclick="google.script.run.drawtrack()">Reset</button>
+        <button id="go" onclick="google.script.run.MovePlayer()">Go</button>
+        <button id="reset" onclick="google.script.run.drawtrack()">Reset</button>
+   <script>
+    document.addEventListener("keydown", function(event){
+        if (event.key=== "ArrowRight"){
+            google.script.run.MovePlayer();
+        }
+        if (event.key === "r"){
+            google.script.run.drawback();
+        }
+    });
+   </script>
     </body>
 </html>

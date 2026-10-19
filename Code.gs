@@ -93,7 +93,7 @@ function countdown(){
     sheet.getRange("A13").setValue("");
 }
 function ShowSidebar(){
-    const html = HtmlService.createHtmlOutputFromFile("Sidebar");
+    const html = HtmlServihwo ce.createHtmlOutputFromFile("Sidebar");
     SpreadsheetApp.getUi().showSidebar(html);
 }
 function onOpen(){
