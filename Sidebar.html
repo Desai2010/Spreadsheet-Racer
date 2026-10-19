@@ -23,13 +23,20 @@
         <h2>Spreadsheet Racer</h2>
         <button id="go" onclick="google.script.run.MovePlayer()">Go</button>
         <button id="reset" onclick="google.script.run.drawtrack()">Reset</button>
+
+        <p>Press → to drive, R to reset</p>
+        <button onclick="google.script.run.setDifficulty(2)">Easy</button>"
+        <button oneclick="google.script.run.setDifficulty(3)">Normal</button>
+        <button onclick="google.script.run.setDifficulty(4)">Hard</button>
+   
+   
    <script>
     document.addEventListener("keydown", function(event){
         if (event.key=== "ArrowRight"){
             google.script.run.MovePlayer();
         }
-        if (event.key === "r"){
-            google.script.run.drawback();
+        if (event.key === "r" || event.key === "R"){
+            google.script.run.drawtrack();
         }
     });
    </script>

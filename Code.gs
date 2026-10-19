@@ -25,6 +25,10 @@ function DrawCars() {
     sheet.getRange("A9:A12").setValue(2);
     sheet.getRange("A13").setValue("");
     sheet.getRange("B1").setValue("");
+
+    if (sheet.getRange("A14").getValue() === ""){
+        sheet.getRange("A14").setValue(3);
+    }
 }
 function MovePlayer() {
     const lock = LockService.getScriptLock();
@@ -56,6 +60,7 @@ function MovePlayer() {
 function MoveOpponents() {
     const sheet = SpreadsheetApp.getActiveSheet();
     const colors  = ["pink" , "yellow" , "purple" , "orange"];
+    const speed = sheet.getRange("A14").getValue();
 
 for (let row = 3; row <= 6; row++) {
     let col = sheet.getRange(row + 6, 1).getValue();
@@ -65,6 +70,7 @@ for (let row = 3; row <= 6; row++) {
     col = col +steps;
     sheet.getRange(row, col).setBackground(color)
     sheet.getRange(row + 6, 1).setValue(col);
+    
     if (col >=26) {
         sheet.getRange("A13").setValue("over");
         sheet.getRange("B1").setValue(color.toUpperCase() + "Wins!");
@@ -93,7 +99,7 @@ function countdown(){
     sheet.getRange("A13").setValue("");
 }
 function ShowSidebar(){
-    const html = HtmlServihwo ce.createHtmlOutputFromFile("Sidebar");
+    const html = HtmlService.createHtmlOutputFromFile("Sidebar");
     SpreadsheetApp.getUi().showSidebar(html);
 }
 function onOpen(){
@@ -101,6 +107,10 @@ function onOpen(){
     .createMenu("Racer")
     .addItem("Open controls", "ShowSidebar")
     .addToUi();
+}
+function setDifficulty(level) {
+    const sheet = SpreadsheetApp.getActiveSheet();
+    sheet.getRange("A14").setValue(level);
 }
 function drawtrack() {
     test();
