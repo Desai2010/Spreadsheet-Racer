@@ -146,6 +146,14 @@ function ResetStats() {
     sheet.getRange("B15:B16").setValue(0);
     sheet.getRange("B18").setValue("");
 }
+function getStats(){
+    const sheet = SpreadsheetApp.getActiveSheet();
+    return {
+        wins: sheet.getRange("B15").getValue(),
+        losses: sheet.getRange("B16").getValue(),
+        best: sheet.getRange("B18").getValue()
+    };
+}
 function placeTiles() {
     const sheet = SpreadsheetApp.getActiveSheet();
 

@@ -21,7 +21,7 @@
         </head>
     <body>
         <h2>Spreadsheet Racer</h2>
-        <button id="go" onclick="google.script.run.MovePlayer()">Go</button>
+        <button id="go" onclick="google.script.run.withSuccessHandler(updateStats).MovePlayer()">Go</button>
         <button id="reset" onclick="google.script.run.drawtrack()">Reset</button>
 
         <p>Press → to drive, R to reset</p>
@@ -30,13 +30,23 @@
         <button onclick="google.script.run.setDifficulty(4)">Hard</button>
         
         <p>Stats:</p>
-        <button onclick="google.script.run.ResetStats()">Reset Stats</button>
+        <p id="stats">Loading...</p>
+        <button onclick="google.script.run.withSuccessHandler(updateStats).ResetStats()">Reset Stats</button>
+
    
    
    <script>
+        function updateStats() {
+            google.script.run.withSuccessHandler(function(s){
+                document.getElementById("stats").textContent = 
+                    "Wins: " + s.wins + " | Losses: " + s.losses + " | Best: " + s.best;
+            }).getStats();
+            }
+        updateStats();
+
     document.addEventListener("keydown", function(event){
         if (event.key=== "ArrowRight"){
-            google.script.run.MovePlayer();
+            google.script.run.withSuccessHandler(updateStats).MovePlayer();
         }
         if (event.key === "r" || event.key === "R"){
             google.script.run.drawtrack();
