@@ -55,6 +55,9 @@ if (tile === "#000000") {
   sheet.getRange("A8").setValue(col)
     if (col >= 26) {
         sheet.getRange("A13").setValue("over")
+        let wins = Number(sheet.getRange("B15").getValue());
+        wins = wins + 1;
+            sheet.getRange("A15").setValue(wins);
        sheet.getRange("B1").setValue("YOU WIN");
        sheet.getRange("B1").setFontSize(18); 
        sheet.getRange("B1").setFontWeight("bold");
@@ -82,6 +85,9 @@ for (let row = 3; row <= 6; row++) {
     
     if (col >=26) {
         sheet.getRange("A13").setValue("over");
+        let losses = Number(sheet.getRange("B16").setValue());
+        losses = losses + 1;
+        sheet.getRange("A13").setValue(losses);
         sheet.getRange("B1").setValue(color.toUpperCase() + " Wins!");
         sheet.getRange("B1").setFontSize(18);
         sheet.getRange("B1").setFontWeight("bold");
@@ -121,6 +127,10 @@ function onOpen(){
 function setDifficulty(level) {
     const sheet = SpreadsheetApp.getActiveSheet();
     sheet.getRange("A14").setValue(level);
+}
+function ResetStats() {
+    const sheet = SpreadsheetApp.getActiveSheet();
+    sheet.getRange("B15:B16").setValue(0);
 }
 function placeTiles() {
     const sheet = SpreadsheetApp.getActiveSheet();
