@@ -16,7 +16,8 @@ function ClearPastFinish() {
 }
 function DrawCars() {
     const sheet = SpreadsheetApp.getActiveSheet();
-    sheet.getRange ("B2").setBackground("Blue")
+    const carColor = sheet.getRange("B19").getValue() || "Blue";
+    sheet.getRange ("B2").setBackground(carColor)
     sheet.getRange ("B3").setBackground("pink")
     sheet.getRange ("B4").setBackground ("yellow")
     sheet.getRange ("B5").setBackground ("purple")
@@ -41,6 +42,8 @@ function MovePlayer() {
     return;
     }
 
+    const carColor = sheet.getRange("B19").getValue() || "Blue";
+
     let moves = Number(sheet.getRange("B17").getValue());
     moves = moves + 1;
     sheet.getRange("B17").setValue(moves);
@@ -57,8 +60,8 @@ if (tile === "#000000") {
     sheet.getRange(2, col).setBackground("Grey");
     col = col - 1;
 }
-  sheet.getRange (2, col).setBackground("Blue")
-  sheet.getRange("A8").setValue(col)
+  sheet.getRange (2, col).setBackground(carColor);
+  sheet.getRange("A8").setValue(col);
    
     if (col >= 26) {
         sheet.getRange("A13").setValue("over")
@@ -74,7 +77,7 @@ if (tile === "#000000") {
        sheet.getRange("B1").setValue("YOU WIN");
        sheet.getRange("B1").setFontSize(18); 
        sheet.getRange("B1").setFontWeight("bold");
-       sheet.getRange("B1").setFontColor("blue");
+       sheet.getRange("B1").setFontColor(carColor);
         SpreadsheetApp.getUi().alert("You win in " + moves + " moves!");
         lock.releaseLock();
         return;
@@ -140,6 +143,10 @@ function onOpen(){
 function setDifficulty(level) {
     const sheet = SpreadsheetApp.getActiveSheet();
     sheet.getRange("A14").setValue(level);
+}
+function setCarColor(color) {
+    const sheet = SpreadsheetApp.getActiveSheet();
+    sheet.getRange("B19").setValue(color);
 }
 function ResetStats() {
     const sheet = SpreadsheetApp.getActiveSheet();
