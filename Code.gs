@@ -25,6 +25,7 @@ function DrawCars() {
     sheet.getRange("A9:A12").setValue(2);
     sheet.getRange("A13").setValue("");
     sheet.getRange("B1").setValue("");
+    sheet.getRange("B17").setValue(0);
 
     if (sheet.getRange("A14").getValue() === ""){
         sheet.getRange("A14").setValue(3);
@@ -39,6 +40,11 @@ function MovePlayer() {
     lock.releaseLock();
     return;
     }
+
+    let moves = Number(sheet.getRange("B17").getValue());
+    moves = moves + 1;
+    sheet.getRange("B17").setValue(moves);
+
   let col = sheet.getRange ("A8").getValue()
   sheet.getRange (2, col).setBackground("Grey")
   col= col + 1
@@ -53,16 +59,23 @@ if (tile === "#000000") {
 }
   sheet.getRange (2, col).setBackground("Blue")
   sheet.getRange("A8").setValue(col)
+   
     if (col >= 26) {
         sheet.getRange("A13").setValue("over")
         let wins = Number(sheet.getRange("B15").getValue());
         wins = wins + 1;
-            sheet.getRange("A15").setValue(wins);
+            sheet.getRange("B15").setValue(wins);
+
+            let best = sheet.getRange("B18").getValue();
+            if (best === "" || moves < best ) {
+                sheet.getRange("B18").setValue(moves);
+            }
+
        sheet.getRange("B1").setValue("YOU WIN");
        sheet.getRange("B1").setFontSize(18); 
        sheet.getRange("B1").setFontWeight("bold");
        sheet.getRange("B1").setFontColor("blue");
-        SpreadsheetApp.getUi().alert("You win!");
+        SpreadsheetApp.getUi().alert("You win in " + moves + " moves!");
         lock.releaseLock();
         return;
     }
@@ -85,9 +98,9 @@ for (let row = 3; row <= 6; row++) {
     
     if (col >=26) {
         sheet.getRange("A13").setValue("over");
-        let losses = Number(sheet.getRange("B16").setValue());
+        let losses = Number(sheet.getRange("B16").getValue());
         losses = losses + 1;
-        sheet.getRange("A13").setValue(losses);
+        sheet.getRange("B16").setValue(losses);
         sheet.getRange("B1").setValue(color.toUpperCase() + " Wins!");
         sheet.getRange("B1").setFontSize(18);
         sheet.getRange("B1").setFontWeight("bold");
@@ -131,6 +144,7 @@ function setDifficulty(level) {
 function ResetStats() {
     const sheet = SpreadsheetApp.getActiveSheet();
     sheet.getRange("B15:B16").setValue(0);
+    sheet.getRange("B18").setValue("");
 }
 function placeTiles() {
     const sheet = SpreadsheetApp.getActiveSheet();
