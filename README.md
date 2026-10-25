@@ -1,5 +1,6 @@
 # Spreadsheet Racer
 
+![Spreadsheet Racer](screenshot.png)
 A racing game built entirely in Google Sheets with Apps Script.
 
 ## How to play
