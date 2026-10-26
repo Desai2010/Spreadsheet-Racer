@@ -88,11 +88,13 @@ if (tile === "#000000") {
 function MoveOpponents() {
     const sheet = SpreadsheetApp.getActiveSheet();
     const colors  = ["pink" , "yellow" , "purple" , "orange"];
+    const names = ["Pinky", "Sunny", "Grape", "Blaze"];
     const speed = sheet.getRange("A14").getValue();
 
 for (let row = 3; row <= 6; row++) {
     let col = sheet.getRange(row + 6, 1).getValue();
     let color = colors[row - 3];
+    let name = names[row - 3];
     sheet.getRange (row, col).setBackground("Grey")
     let steps = Math.floor(Math.random() * speed);
     col = col +steps;
@@ -104,11 +106,12 @@ for (let row = 3; row <= 6; row++) {
         let losses = Number(sheet.getRange("B16").getValue());
         losses = losses + 1;
         sheet.getRange("B16").setValue(losses);
-        sheet.getRange("B1").setValue(color.toUpperCase() + " Wins!");
+        
+        sheet.getRange("B1").setValue(name.toUpperCase() + " Wins!");
         sheet.getRange("B1").setFontSize(18);
         sheet.getRange("B1").setFontWeight("bold");
         sheet.getRange("B1").setFontColor(color);
-        SpreadsheetApp.getUi().alert("You lose");
+        SpreadsheetApp.getUi().alert(name + " beat you!");
         return;
     }
 }
