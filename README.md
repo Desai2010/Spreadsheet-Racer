@@ -40,3 +40,5 @@ Way #2
 6. assign MovePlayer to the go button and drawtrack to the reset button
 7. Resize columns and rows to 25 sow teh cells look square(optional)
 8. Click reset to start
+
+There may be some AI features due to my first time ever coding and needing to learn :)
