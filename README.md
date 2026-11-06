@@ -33,7 +33,7 @@ A racing game built entirely in Google Sheets with Apps Script. Every cell is a 
 - **One loop moves all four opponents.** In `MoveOpponents`, a `for` loop runs rows 3 to 6. Each time it reads that car's position, greys the old cell, picks a random number of steps with `Math.random`, paints the new cell and saves the position. That way I didn't have to write the moving code four times.
 - **Countdown.** `SpreadsheetApp.flush()` and `Utilities.sleep(1000)` show each number one second apart.
 
-## Bugs I fixed
+## Bugs and fixes
 
 - **Cars disappeared.** Opponent colors were being read off the sheet, and sometimes the color was lost. I moved the colors into a list in the code.
 - **Cars duplicated.** Clicking Go! fast started two moves at once. `LockService` makes each click wait its turn.
@@ -63,4 +63,4 @@ Before this, I had only used Apps Script for small things, like making my spread
 
 ## Use of AI
 
-I wrote the game logic myself. This was my first real coding project, and I used AI to help me learn how the code works.
+I designed the game and wrote the core race loop myself, using hints from Claude. For the sidebar and later features (difficulty, tiles, stats, color picker), Claude supplied most of the code, which I adapted and tested. Claude also helped diagnose bugs from my screenshots. I logged 10.2 hours on it.
