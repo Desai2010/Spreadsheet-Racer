@@ -63,4 +63,4 @@ Before this, I had only used Apps Script for small things, like making my spread
 
 ## Use of AI
 
-I designed the game and wrote the core race loop myself, using hints from Claude. For the sidebar and later features (difficulty, tiles, stats, color picker), Claude supplied most of the code, which I adapted and tested. Claude also helped diagnose bugs from my screenshots. I logged 10.2 hours on it.
+I designed the game and wrote the core race loop myself, using hints from Claude because its my first time coding.
